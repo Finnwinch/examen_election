@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Election-Recherche</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="conteneur_haut">
+    <div class="titre">
+        <h1>
+            Élection-2023
+        </h1>
+        <img th:src="@{/images/LogoElection.png}" alt="Logo des élections" width="100" />
+    </div>
+    <div class="zone_droite">
+        <div class="menu">
+            <div>
+                <a th:href="@{/}"> Accueil
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/candidat/getAll}">
+                    Affichage de tous les Candidats
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/candidat/new}">
+                    Ajouter un candidat
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/district/search}">
+                    Recherche d'un District
+                </a>
+            </div>
+        </div>
+        <div class="contenu">
+
+            <form class="mon_formulaire" onsubmit="return checkDistrcit(this)" th:object="${District}" th:action="@{/district/found}" enctype="multipart/form-data" method="post">
+                <div>
+                    <label>Nom du district : </label>
+
+                    <input type="text" th:field="*{nom}" id="nom" required minlength="2" maxlength="45"  />
+                </div>
+                <input type="submit" value="Chercher le district" />
+            </form>
+            <script>
+                function checkDistrcit(form) {
+                    var nom = $("#nom").val();
+                    console.log("Nom du district:", nom);
+                    $.ajax({
+                        url: '/utilisateur/' + nom,
+                        type: 'POST',
+                        success: function ( data ) {
+                            if(data == "yes") {
+                                console.log("attempt to submit")
+                                form.submit();
+                            } else {
+                                console.log("not found!")
+                                alert("Le district : " + nom + " n'existe pas dans le Grand Montréal. Veuillez saisir un autre district")
+                            }
+                        }
+                    });
+                    return false;
+                }
+            </script>
+            <p>Pour afficher un district : entrez le nom du district et appuyer sur le bouton</p>
+        </div>
+
+    </div>
+</div>
+<div class="conteneur_bas">
+    Examen pratique  pour le cours 420-G26-RO-Applications Web 2, prof: Dini Ahamada
+    <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload" target="blank">
+        <img th:src="@{/images/validateur.png}" alt="validateur w3c" width="80" />
+    </a>
+</div>
+
+</body>
+</html>

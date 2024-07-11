@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Election-Résultats</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+<div class="conteneur_haut">
+    <div class="titre">
+        <h1>
+            Élection-2023
+        </h1>
+        <img th:src="@{/images/LogoElection.png}" alt="Logo des élections" width="100" />
+    </div>
+    <div class="zone_droite">
+        <div class="menu">
+            <div>
+                <a th:href="@{/}"> Accueil
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/candidat/getAll}">
+                    Affichage de tous les Candidats
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/candidat/new}">
+                    Ajouter un candidat
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/district/search}">
+                    Recherche d'un District
+                </a>
+            </div>
+        </div>
+
+        <div class="contenu" th:if="${listCandidat !=null && District !=null}">
+            <h1 th:text="${District.nom} + ' [' + ${listCandidat.size()} + ' Candidats, ' + ${District.electeurs} + ' électeurs inscrits, ' + ${Votes} + ' votes reçus] '"></h1>
+            <ul>
+                <li th:each="candidat : ${listCandidat}" th:class="${candidat eq CandidatBigger ? 'theBigger' : ''}">
+                    <span>[#</span>
+                    <span th:text="${candidat.id}"></span>
+                    <span>]</span>
+                    <span th:text="${candidat.nom}"></span>
+                    <span>( Parti:</span>
+                    <span th:text="${candidat.parti}"></span>
+                    <span>( District:</span>
+                    <span th:text="${candidat.district}"></span>
+                    <span>) :</span>
+                    <span th:text="${candidat.votes}"></span>
+                    <span>votes</span>
+                </li>
+            </ul>
+        </div>
+</div>
+</div>
+<div class="conteneur_bas">
+    Examen pratique  pour le cours 420-G26-RO-Applications Web 2, prof: Dini Ahamada
+    <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload" target="blank">
+        <img th:src="@{/images/validateur.png}" alt="validateur w3c" width="80" />
+    </a>
+</div>
+
+
+</body>
+</html>

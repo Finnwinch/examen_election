@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Election-Accueil</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="conteneur_haut">
+    <div class="titre">
+        <h1>
+            Élection-2023
+        </h1>
+        <img th:src="@{/images/LogoElection.png}" alt="Logo des élections" width="100" />
+    </div>
+    <div class="zone_droite">
+        <div class="menu">
+            <div>
+                <a th:href="@{/}"> Accueil
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/candidat/getAll}">
+                       Affichage de tous les Candidats
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/candidat/new}">
+                      Ajouter un candidat
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/district/search}">
+                       Recherche d'un District
+                </a>
+            </div>
+        </div>
+        <div class="contenu">
+            <h1>Élection-MTL 2023</h1>
+            <h3>Bienvenue aux élections municipales du grand Montréal</h3>
+        </div>
+    </div>
+</div>
+<div class="conteneur_bas">
+    Examen pratique  pour le cours 420-G26-RO-Applications Web 2, prof: Dini Ahamada
+    <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload" target="blank">
+        <img th:src="@{/images/validateur.png}" alt="validateur w3c" width="80" />
+    </a>
+</div>
+</body>
+</html>

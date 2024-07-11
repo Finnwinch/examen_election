@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Election-Accueil</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="conteneur_haut">
+    <div class="titre">
+        <h1>
+            Élection-2023
+        </h1>
+        <img th:src="@{/images/LogoElection.png}" alt="Logo des élections" width="100" />
+    </div>
+    <div class="zone_droite">
+        <div class="menu">
+            <div>
+                <a th:href="@{/}"> Accueil
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/candidat/getAll}">
+                    Affichage de tous les Candidats
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/candidat/new}">
+                    Ajouter un candidat
+                </a>
+            </div>
+            <div>
+                <a th:href="@{/district/search}">
+                    Recherche d'un District
+                </a>
+            </div>
+        </div>
+        <div class="contenu">
+
+            <form th:action="@{/candidat/create}" th:object="${Candidat}" class="mon_formulaire"  method="post"
+                  style="max-width: 600px; margin: 0 auto;">
+                <div>
+                    <label>Nom du candidat : </label>
+                    <input type="text" th:field="*{nom}" name="nom_candidat"
+                           required minlength="3" maxlength="256"/>
+                </div>
+                <div>
+                    <label>Nom du parti : </label>
+                    <input type="text" th:field="*{parti}" name="parti"
+                           required minlength="3" maxlength="256"/>
+                </div>
+                <div>
+                    <label>Nombres des votes : </label>
+                    <input type="text" th:field="*{votes}" name="votes"
+                           required minlength="3" maxlength="256"/>
+                </div>
+                <div>
+                    <label>District:</label>
+                    <select class="form-control" th:field="*{district}" required>
+                        <option th:each="district : ${listDistrict}"
+                                th:text="${district.nom}"
+                                th:value="${district.id}">
+                        </option>
+                    </select>
+
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Entregistrer" class="btn btn-primary m-3" />
+                    <input type="button" value="Annuler" class="btn btn-secondary" id="buttonCancel" />
+                </div>
+
+            </form>
+            <p style="text-align:center; color: #2040ee">Entrez le nom du candidat, le parti, le nombre des votes et selectionnez le district</p>
+        </div>
+    </div>
+</div>
+<div class="conteneur_bas">
+    Examen pratique  pour le cours 420-G26-RO-Applications Web 2, prof: Dini Ahamada
+    <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload" target="blank">
+        <img th:src="@{/images/validateur.png}" alt="validateur w3c" width="80" />
+    </a>
+</div>
+
+</body>
+</html>
